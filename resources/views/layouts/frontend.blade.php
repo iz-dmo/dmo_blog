@@ -10,6 +10,7 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
     </head>
     <body>
         <!-- Responsive navbar-->
