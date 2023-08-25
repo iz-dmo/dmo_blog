@@ -22,3 +22,12 @@ Route::resource('/blog',App\Http\Controllers\BlogController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//backend
+Route::group(['prefix'=>'backend','as'=> 'backend.'],function(){
+    Route::get('/',[App\Http\Controllers\Admin\DashboardController::class,'index'])->name('dashboard');
+    Route::resource('categories',App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('posts',App\Http\Controllers\Admin\PostController::class);
+    Route::resource('users',App\Http\Controllers\Admin\UserController::class);
+
+});

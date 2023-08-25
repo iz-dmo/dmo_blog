@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->unsignedBigInteger('categoryID');
-            $table->foreign('categoryID')
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')
                     ->references('id')
                     ->on('categories')
                     ->onDelete('cascade');
-            $table->unsignedBigInteger('userID')
-                  ->foreign('userID')
+            $table->unsignedBigInteger('user_id')
+                  ->foreign('user_id')
                   ->references('id')
                   ->on('users')
                   ->onDelete('cascade');

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Post;
+
 
 class BlogController extends Controller
 {
@@ -11,7 +14,12 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('blog.index');
+        $categories=Category::all();
+        $posts=Post::all();
+
+        return view('blog.index',compact('categories','posts'));
+
+
     }
 
     /**
@@ -35,8 +43,22 @@ class BlogController extends Controller
      */
     public function show(string $id)
     {
-        return view('blog/post');
+        $post=Post::find($id);
+        $categories=Category::all();
+        $post_category=$post->category_id;
+        $post_categories=Post::where('category_id',$post->category_id)->get();
+        return view('blog.post',compact('post','post_categories','categories'));
     }
+
+    // public function categorylist(string $category_id){
+    //     $post=Post::find($category_id);
+    //     $category=Category::all();
+    //     $post_category=$post->category_id;
+    //     $post_categories=Post::where('category_id',$post->category_id)->get();
+    //     return view('blog.postCategory',compact('post','post_categories','category'));
+    // }
+
+    
 
     /**
      * Show the form for editing the specified resource.
