@@ -4,13 +4,13 @@
         <div class="container mt-5">
             <div class="row">
                 @foreach($post_categories as $post)
-                <div class="col-lg-8">
+                <div class="col-lg-3">
                     <!-- Post content-->
                     <article>
                         <!-- Post header-->
                         <header class="mb-4">
                             <!-- Post title-->
-                            <h1 class="fw-bolder mb-1">Welcome to Blog Post!</h1>
+                            <h1 class="fw-bolder mb-1">{{$post->title}}</h1>
                             <!-- Post meta content-->
                             <div class="text-muted fst-italic mb-2">Posted on {{$post->updated_at}}</div>
                             <!-- Post categories-->
@@ -28,13 +28,13 @@
                 </div>
                 @endforeach
                 <!-- Side widgets-->
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <!-- Search widget-->
                     <div class="card mb-4">
                         <div class="card-header">Search</div>
                         <div class="card-body">
                             <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search"/>
                                 <button class="btn btn-primary" id="button-search" type="button">Go!</button>
                             </div>
                         </div>

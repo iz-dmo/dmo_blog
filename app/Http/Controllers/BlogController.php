@@ -45,7 +45,7 @@ class BlogController extends Controller
     {
         $post=Post::find($id);
         $categories=Category::all();
-        $post_category=$post->category_id;
+        // $post_category=$post->category_id;
         $post_categories=Post::where('category_id',$post->category_id)->get();
         return view('blog.post',compact('post','post_categories','categories'));
     }
@@ -53,7 +53,7 @@ class BlogController extends Controller
     // public function categorylist(string $category_id){
     //     $post=Post::find($category_id);
     //     $category=Category::all();
-    //     $post_category=$post->category_id;
+    //     // $post_category=$post->category_id;
     //     $post_categories=Post::where('category_id',$post->category_id)->get();
     //     return view('blog.postCategory',compact('post','post_categories','category'));
     // }

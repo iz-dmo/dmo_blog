@@ -8,6 +8,8 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
 use App\Http\Requests\PostRequest;
+use App\Http\Requests\PostUpdateRequest;
+
 
 class PostController extends Controller
 {
@@ -37,6 +39,8 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
+
+        // dd($request);
         $posts=Post::create($request->all());
         $fileName=time().'.'.$request->photo->extension();
         $upload=$request->photo->move(public_path('images/',$fileName));
@@ -44,7 +48,7 @@ class PostController extends Controller
             $posts->photo="/images/".$fileName;
         }
         $posts->save();
-        return redirect()->route('posts.index');
+        return redirect()->route('backend.posts.index');
     }
 
     /**
@@ -60,16 +64,35 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post=Post::find($id);
+        $categories=Category::all();
+        $users=User::all();
+        return view('admin.posts.edit',compact('post','categories','users'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PostUpdateRequest $request, string $id)
     {
-        //
+        // dd($request);
+        $post=Post::find($id);
+        $post->update($request->all());
+        if($request->hasFile('new_photo')){
+            $fileName=time().'.'.$request->new_photo->extension();
+            $upload=$request->new_photo->move(public_path('images/'),$fileName);
+            if($upload){
+                $post->photo="/images/".$fileName;
+            }
+        }
+        else{
+                $post->photo=$request->old_photo;
+            }
+            
+        $post->save();
+        return redirect()->route('backend.posts.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.

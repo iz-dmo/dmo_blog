@@ -22,7 +22,7 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
+            'title'=>'required',
             'category_id'=>'required',
             'user_id'=>'required',
             'photo'=>'required',
@@ -32,7 +32,7 @@ class PostRequest extends FormRequest
     }
     public function messages(){
         return[
-            'name.required'=>'*Required',
+            'title.required'=>'*Required',
             'category_id.required'=>'*Required',
             'user_id.required'=>'*Required',
             'photo.required'=>'*Required',

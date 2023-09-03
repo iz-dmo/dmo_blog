@@ -5,6 +5,8 @@ use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\CategoryUpdateRequest;
+
 
 class CategoryController extends Controller
 {
@@ -34,7 +36,7 @@ class CategoryController extends Controller
     {
         $categories=Category::create($request->all());
         $categories->save();
-        return redirect()->route('categories.index');
+        return redirect()->route('backend.categories.index');
         
     }
 
@@ -51,15 +53,19 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category=Category::find($id);
+        return view('admin.categories.edit',compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryUpdateRequest $request, string $id)
     {
-        //
+        $category=Category::find($id);
+        $category->update($request->all());
+        $category->save();
+        return redirect()->route('backend.categories.index');
     }
 
     /**
